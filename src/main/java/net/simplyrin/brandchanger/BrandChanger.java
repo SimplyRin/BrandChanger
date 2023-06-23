@@ -1,5 +1,6 @@
 package net.simplyrin.brandchanger;
 
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.BrandSendEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -37,6 +38,12 @@ public class BrandChanger extends Plugin implements Listener {
 	
 	@EventHandler
 	public void onBrandSend(BrandSendEvent event) {
+		ProxiedPlayer player = (ProxiedPlayer) event.getUserConnection();
+		
+		if (player.hasPermission("brandchanger.bypass")) {
+			return;
+		}
+		
 		event.setBrand("vanilla");
 	}
 
